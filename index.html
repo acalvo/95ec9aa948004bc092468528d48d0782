@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Práctica de preguntas</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header>
+    <h1>Batería de preguntas</h1>
+  </header>
+
+  <!-- Configuración -->
+  <section id="setup" class="card">
+    <form id="setup-form" novalidate>
+      <label for="seleccion">¿Qué preguntas quieres practicar?</label>
+      <input id="seleccion" type="text" value="1-256" autocomplete="off" spellcheck="false">
+      <p class="hint">Entre la 1 y la 256. Puedes usar rangos (<code>1-128</code>), listas (<code>4 18 29 48 199</code>) o mezclar ambos (<code>1-50, 120, 200-220</code>). Separa con espacios o comas.</p>
+
+      <fieldset>
+        <legend>Orden</legend>
+        <label class="radio"><input type="radio" name="orden" value="orden" checked> En orden</label>
+        <label class="radio"><input type="radio" name="orden" value="azar"> Preguntas aleatorias</label>
+        <label class="radio"><input type="radio" name="orden" value="azar-total"> Preguntas y respuestas aleatorias</label>
+        <p class="hint" style="margin:6px 0 0">En el modo completo, las preguntas con opciones como «todas las anteriores» o «a y b son correctas» conservan el orden de sus respuestas para no perder el sentido.</p>
+      </fieldset>
+
+      <p id="setup-error" class="error" role="alert" hidden></p>
+      <button type="submit" class="primary">Empezar</button>
+    </form>
+  </section>
+
+  <!-- Pregunta -->
+  <section id="quiz" class="card" hidden>
+    <div class="topbar">
+      <span id="progress"></span>
+      <span id="score">Aciertos: <b id="n-ok">0</b> · Fallos: <button type="button" id="n-ko" class="count" title="Copiar listado de preguntas falladas">0</button></span>
+      <button type="button" id="quit" class="link">Salir</button>
+    </div>
+    <div class="bar"><div id="bar-fill"></div></div>
+    <p class="qid" id="qid"></p>
+    <h2 id="qtext"></h2>
+    <form id="q-form">
+      <div id="options" role="radiogroup" aria-labelledby="qtext"></div>
+      <p id="feedback" role="status" hidden></p>
+      <div class="actions">
+        <button type="submit" id="send" class="primary" disabled>Enviar</button>
+        <button type="button" id="next" class="primary" hidden>Siguiente</button>
+      </div>
+      <p class="hint keys">Atajos: A–D (o 1–4) para elegir · Intro para enviar / continuar</p>
+    </form>
+  </section>
+
+  <!-- Resultado -->
+  <section id="result" class="card" hidden>
+    <h2>Resultado</h2>
+    <p id="result-summary" class="big"></p>
+    <div id="failed-box" hidden>
+      <p>Preguntas falladas:</p>
+      <p id="failed-list" class="failed"></p>
+    </div>
+    <div class="actions">
+      <button type="button" id="retry-failed" class="primary" hidden>Repetir falladas</button>
+      <button type="button" id="again">Volver al inicio</button>
+    </div>
+  </section>
+</main>
+<script src="preguntas.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
